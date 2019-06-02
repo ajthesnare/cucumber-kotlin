@@ -1,0 +1,16 @@
+import cucumber.api.Scenario
+import cucumber.api.java.After
+import cucumber.api.java.Before
+
+class Hooks(private var world: World) {
+    @Before
+    fun `Runs before every scenario`(scenario: Scenario) {
+        world.setUpChromeDriver()
+        println("Scenario: ${scenario.name}")
+    }
+
+    @After
+    fun `Runs after every scenario`() {
+        world.driver.close()
+    }
+}
