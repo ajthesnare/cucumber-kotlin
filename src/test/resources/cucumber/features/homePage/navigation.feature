@@ -4,9 +4,9 @@ Feature: Home Page - Navigation
 
   Scenario Outline: Navigate to the <page> page
     Given I am on the home page
-    When I click the "<link>" link
+    When I click the "<page>" link
     Then the "<page>" page should display
     Examples:
-      | link                 | page                |
-      | abtest               | A/B Testing         |
-      | add_remove_elements/ | Add/Remove Elements |
+      | page                |
+      | A/B Testing         |
+      | Add/Remove Elements |

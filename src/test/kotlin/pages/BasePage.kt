@@ -1,34 +1,43 @@
 package pages
 
 import World
-import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.FindBy
 import org.openqa.selenium.support.PageFactory
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory
-import util.Constants.DEFAULT_TIMEOUT
+import util.Constants.TIMEOUT_SEC_INT
 
-abstract class BasePage(world: World) {
+abstract class BasePage(private var world: World) {
     abstract val url: String
     abstract val path: String
+    abstract val pageTitle: String
 
     private val driver = world.driver
 
     @FindBy(xpath = "//h3")
-    val title: WebElement? = null
+    private val title: WebElement? = null
 
     init {
-        AjaxElementLocatorFactory(driver, DEFAULT_TIMEOUT.toInt())
+        AjaxElementLocatorFactory(driver, TIMEOUT_SEC_INT)
         PageFactory.initElements(driver, this)
     }
 
-    abstract fun isLoaded() : Boolean
+    abstract fun get()
 
-    fun get() {
-        driver.get(url)
+    abstract fun isLoaded(): Boolean
+
+    fun isPageLoaded(url: String, titleText: String): Boolean {
+        val correctURL = world.driver.currentUrl == url
+        val titleDisplayed = getTitle().isDisplayed
+        val titleCorrect = getTitleText().contains(titleText)
+        return correctURL && titleDisplayed && titleCorrect
     }
 
-    fun clickLink(linkText: String) {
-        driver.findElement(By.xpath("//a[@href='/$linkText']")).click()
+    private fun getTitle(): WebElement {
+        return title!!
+    }
+
+    private fun getTitleText(): String {
+        return title!!.text
     }
 }
