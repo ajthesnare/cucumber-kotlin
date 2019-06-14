@@ -16,8 +16,7 @@ class AllSteps(var world: World) {
 
     @When("^I click the \"(.+)\" link$")
     fun `I click the {link} link`(linkText: String) {
-        val homePage = HomePage(world)
-        homePage.clickLink(linkText)
+        world.clickLinkByText(linkText)
     }
 
     @Then("^the \"(.+)\" page should display$")

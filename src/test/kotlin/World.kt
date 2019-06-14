@@ -1,6 +1,9 @@
+import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
-import util.Constants.DEFAULT_TIMEOUT
+import util.Constants.INTERVAL_MS
+import util.Constants.TIMEOUT_MS
+import util.Constants.TIMEOUT_SEC_LONG
 import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
@@ -10,10 +13,10 @@ class World {
     fun setUpChromeDriver() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\A.J\\Development\\chromedriver.exe")
         driver = ChromeDriver()
-        driver.manage().timeouts().implicitlyWait(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+        driver.manage().timeouts().implicitlyWait(TIMEOUT_SEC_LONG, TimeUnit.SECONDS)
     }
 
-    fun retry(timeoutMs: Long = 30000, intervalMs: Long = 100, block: () -> Any) {
+    fun retry(timeoutMs: Long = TIMEOUT_MS, intervalMs: Long = INTERVAL_MS, block: () -> Any) {
         val timeoutSeconds = timeoutMs / 1000
         val endTime = LocalDateTime.now().plusSeconds(timeoutSeconds)
         while (LocalDateTime.now() <= endTime) {
@@ -27,5 +30,9 @@ class World {
             }
         }
         block()
+    }
+
+    fun clickLinkByText(linkText: String) {
+        driver.findElement(By.xpath("//a[text()='$linkText']")).click()
     }
 }
