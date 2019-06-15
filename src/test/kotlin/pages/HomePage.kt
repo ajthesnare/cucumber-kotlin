@@ -8,8 +8,8 @@ import util.Constants.TIMEOUT_SEC_INT
 
 class HomePage(private var world: World) : BasePage(world) {
     override val path = ""
-    override val url = BASE_URL
-    override val pageTitle = ""
+    override val url = "$BASE_URL/"
+    override val pageTitle = "Welcome to the-internet"
 
     init {
         AjaxElementLocatorFactory(world.driver, TIMEOUT_SEC_INT)
@@ -21,6 +21,10 @@ class HomePage(private var world: World) : BasePage(world) {
     }
 
     override fun isLoaded(): Boolean {
-        return isPageLoaded(url, pageTitle)
+        println(world.driver.currentUrl)
+        val correctURL = world.driver.currentUrl == url
+        val titleDisplayed = getH1Heading().isDisplayed
+        val titleCorrect = getH1HeadingText().contains(pageTitle)
+        return correctURL && titleDisplayed && titleCorrect
     }
 }

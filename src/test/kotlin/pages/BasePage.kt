@@ -14,8 +14,14 @@ abstract class BasePage(private var world: World) {
 
     private val driver = world.driver
 
+    @FindBy(xpath = "//h1")
+    private val h1Heading: WebElement? = null
+
+    @FindBy(xpath = "//h2")
+    private val h2Heading: WebElement? = null
+
     @FindBy(xpath = "//h3")
-    private val title: WebElement? = null
+    private val h3Heading: WebElement? = null
 
     init {
         AjaxElementLocatorFactory(driver, TIMEOUT_SEC_INT)
@@ -26,18 +32,27 @@ abstract class BasePage(private var world: World) {
 
     abstract fun isLoaded(): Boolean
 
-    fun isPageLoaded(url: String, titleText: String): Boolean {
-        val correctURL = world.driver.currentUrl == url
-        val titleDisplayed = getTitle().isDisplayed
-        val titleCorrect = getTitleText().contains(titleText)
-        return correctURL && titleDisplayed && titleCorrect
+    fun getH1Heading(): WebElement {
+        return h1Heading!!
     }
 
-    private fun getTitle(): WebElement {
-        return title!!
+    fun getH1HeadingText(): String {
+        return h1Heading!!.text
     }
 
-    private fun getTitleText(): String {
-        return title!!.text
+    fun getH2Heading(): WebElement {
+        return h2Heading!!
+    }
+
+    fun getH2HeadingText(): String {
+        return h2Heading!!.text
+    }
+
+    fun getH3Heading(): WebElement {
+        return h3Heading!!
+    }
+
+    fun getH3HeadingText(): String {
+        return h3Heading!!.text
     }
 }

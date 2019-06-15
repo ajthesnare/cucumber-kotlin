@@ -21,6 +21,9 @@ class ABTestingPage(private var world: World) : BasePage(world) {
     }
 
     override fun isLoaded(): Boolean {
-        return isPageLoaded(url, pageTitle)
+        val correctURL = world.driver.currentUrl == url
+        val titleDisplayed = getH3Heading().isDisplayed
+        val titleCorrect = getH3HeadingText().contains(pageTitle)
+        return correctURL && titleDisplayed && titleCorrect
     }
 }

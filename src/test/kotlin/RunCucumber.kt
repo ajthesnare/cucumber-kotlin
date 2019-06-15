@@ -5,7 +5,8 @@ import org.junit.runner.RunWith
 @RunWith(Cucumber::class)
 @CucumberOptions(
         features = ["src/test/resources/cucumber/features"],
-        tags = ["not @mute"],
-        plugin = ["pretty", "html:target/reports"]
+        tags = ["@AJ and not @TODO"],
+        plugin = ["pretty", "html:target/reports"],
+        glue = ["steps"]
 )
 class RunCucumber
