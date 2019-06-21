@@ -10,8 +10,8 @@ Feature: Home Page - Link Navigation
       | page                |
       | A/B Testing         |
       | Add/Remove Elements |
-  @TODO
-    Examples: TODO
+  @todo
+    Examples:
       | page                          |
       | Basic Auth                    |
       | Broken Images                 |
