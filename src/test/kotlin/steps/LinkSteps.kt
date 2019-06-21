@@ -1,6 +1,6 @@
 package steps
 
-import World
+import support.World
 import cucumber.api.java.en.When
 
 class LinkSteps(var world: World) {

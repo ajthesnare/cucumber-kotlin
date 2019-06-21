@@ -1,8 +1,8 @@
 package pages
 
-import World
 import org.openqa.selenium.support.PageFactory
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory
+import support.World
 import util.Constants.BASE_URL
 import util.Constants.TIMEOUT_SEC_INT
 

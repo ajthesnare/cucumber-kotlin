@@ -1,10 +1,10 @@
 package pages
 
-import World
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.FindBy
 import org.openqa.selenium.support.PageFactory
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory
+import support.World
 import util.Constants.TIMEOUT_SEC_INT
 
 abstract class BasePage(private var world: World) {

@@ -1,6 +1,6 @@
 package steps
 
-import World
+import support.World
 import cucumber.api.java.en.Then
 import io.cucumber.datatable.DataTable
 import org.junit.Assert.assertTrue

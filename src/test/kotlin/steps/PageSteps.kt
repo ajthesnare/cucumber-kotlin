@@ -1,6 +1,6 @@
 package steps
 
-import World
+import support.World
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
 import pages.ABTestingPage

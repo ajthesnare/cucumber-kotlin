@@ -1,4 +1,4 @@
-
+package support
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit
 
 class World {
     lateinit var driver: WebDriver
+    var value: Int = 0
 
     fun setUpChromeDriver() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\A.J\\Development\\chromedriver.exe")
