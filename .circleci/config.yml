@@ -38,6 +38,7 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
         environment:
+          ENV: "remote"
           CHROME_BIN: "/usr/bin/google-chrome"
     working_directory: ~/cucumber-kotlin
     environment:
