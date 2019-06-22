@@ -21,7 +21,7 @@ class World {
 //        driver.manage().timeouts().implicitlyWait(TIMEOUT_SEC_LONG, TimeUnit.SECONDS)
 
         val capability = DesiredCapabilities.chrome()
-        driver = RemoteWebDriver(URL("192.168.240.3"), capability)
+        driver = RemoteWebDriver(URL("http://localhost:4444/wd/hub"), capability)
 
     }
 
