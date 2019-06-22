@@ -37,6 +37,7 @@ jobs:
   test:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
+      - image: selenium/standalone-chrome:3.4.0
         environment:
           CHROME_BIN: "/usr/bin/google-chrome"
     working_directory: ~/cucumber-kotlin
