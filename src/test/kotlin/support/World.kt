@@ -13,7 +13,9 @@ class World {
     var value: Int = 0
 
     fun setUpChromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe")
+//        System.setProperty("webdriver.chrome.driver", "chromedriver.exe")
+        System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_BIN"))
+
         driver = ChromeDriver()
         driver.manage().timeouts().implicitlyWait(TIMEOUT_SEC_LONG, TimeUnit.SECONDS)
     }

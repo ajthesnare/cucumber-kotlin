@@ -27,6 +27,8 @@ jobs:
   test:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
+        environment:
+            CHROME_BIN: "/usr/bin/google-chrome"
     working_directory: ~/cucumber-kotlin
     environment:
       MAVEN_OPTS: -Xmx3200m
