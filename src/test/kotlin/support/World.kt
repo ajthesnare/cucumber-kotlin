@@ -1,20 +1,34 @@
 package support
+
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.remote.RemoteWebDriver
 import util.Constants.INTERVAL_MS
 import util.Constants.TIMEOUT_MS
 import util.Constants.TIMEOUT_SEC_LONG
+import java.net.URL
 import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
+
 
 class World {
     lateinit var driver: WebDriver
     var value: Int = 0
 
     fun setUpChromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\A.J\\Development\\chromedriver.exe")
-        driver = ChromeDriver()
+        when (System.getenv("ENV") ?: "local") {
+            "local" -> {
+                System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_BIN") ?: "chromedriver.exe")
+                driver = ChromeDriver()
+            }
+            "remote" -> {
+                val capability = DesiredCapabilities.chrome()
+                driver = RemoteWebDriver(URL("http://localhost:4444/wd/hub"), capability)
+            }
+            else -> throw Exception("Invalid ENV: ${System.getenv("env")}")
+        }
         driver.manage().timeouts().implicitlyWait(TIMEOUT_SEC_LONG, TimeUnit.SECONDS)
     }
 
