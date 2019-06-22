@@ -45,7 +45,7 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
     steps:
       - checkout
-      - run: mkdir reports/selenium
+      - run: mkdir /target/selenium-reports
       - run:
           name: Download Selenium
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
@@ -55,11 +55,11 @@ jobs:
           background: true
       - run: mvn test
       - store_artifacts:
-          path: /reports/selenium
+          path: /target/selenium-reports
       - store_artifacts:
-          path: target/reports
+          path: /target/cucumber-reports
       - store_artifacts:
-          path: target/surefire-reports
+          path: /target/surefire-reports
 
 workflows:
   version: 2
