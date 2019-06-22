@@ -62,7 +62,8 @@ workflows:
       - lint-gherkin
       - build:
           requires:
-            - lint
+            - lint-kotlin
+            - lint-gherkin
       - test:
           requires:
             - build
