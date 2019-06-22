@@ -2,12 +2,13 @@ package support
 
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.remote.RemoteWebDriver
 import util.Constants.INTERVAL_MS
 import util.Constants.TIMEOUT_MS
-import util.Constants.TIMEOUT_SEC_LONG
+import java.net.URL
 import java.time.LocalDateTime
-import java.util.concurrent.TimeUnit
+
 
 class World {
     lateinit var driver: WebDriver
@@ -16,8 +17,12 @@ class World {
     fun setUpChromeDriver() {
         System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_BIN") ?: "chromedriver.exe")
 
-        driver = ChromeDriver()
-        driver.manage().timeouts().implicitlyWait(TIMEOUT_SEC_LONG, TimeUnit.SECONDS)
+//        driver = ChromeDriver()
+//        driver.manage().timeouts().implicitlyWait(TIMEOUT_SEC_LONG, TimeUnit.SECONDS)
+
+        val capability = DesiredCapabilities.chrome()
+        driver = RemoteWebDriver(URL("192.168.240.3"), capability)
+
     }
 
     fun retry(timeoutMs: Long = TIMEOUT_MS, intervalMs: Long = INTERVAL_MS, block: () -> Any) {
