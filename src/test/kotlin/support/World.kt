@@ -18,7 +18,7 @@ class World {
     var value: Int = 0
 
     fun setUpChromeDriver() {
-        when (System.getenv("env") ?: "local") {
+        when (System.getenv("ENV") ?: "local") {
             "local" -> {
                 System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_BIN") ?: "chromedriver.exe")
                 driver = ChromeDriver()
