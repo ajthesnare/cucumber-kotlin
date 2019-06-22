@@ -57,9 +57,9 @@ jobs:
       - store_artifacts:
           path: test-reports/selenium.log
       - store_artifacts:
-          path: /target/cucumber-reports/
+          path: target/cucumber-reports/
       - store_artifacts:
-          path: /target/surefire-reports/
+          path: target/surefire-reports/
 
 workflows:
   version: 2
