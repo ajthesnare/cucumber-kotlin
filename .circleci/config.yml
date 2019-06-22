@@ -57,7 +57,7 @@ jobs:
 
 workflows:
   version: 2
-  build-test-and-deploy:
+  lint-build-test:
     jobs:
       - lint-kotlin
       - lint-gherkin
