@@ -1,4 +1,5 @@
 package support
+
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
@@ -13,8 +14,7 @@ class World {
     var value: Int = 0
 
     fun setUpChromeDriver() {
-//        System.setProperty("webdriver.chrome.driver", "chromedriver.exe")
-        System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_BIN"))
+        System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_BIN") ?: "chromedriver.exe")
 
         driver = ChromeDriver()
         driver.manage().timeouts().implicitlyWait(TIMEOUT_SEC_LONG, TimeUnit.SECONDS)
