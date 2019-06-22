@@ -6,7 +6,7 @@ version: 2
 jobs:
   lint-kotlin:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:8-jdk-browsers
     working_directory: ~/cucumber-kotlin
     environment:
       MAVEN_OPTS: -Xmx3200m
@@ -16,7 +16,7 @@ jobs:
 
   lint-gherkin:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:8-jdk-browsers
     working_directory: ~/cucumber-kotlin
     environment:
       MAVEN_OPTS: -Xmx3200m
@@ -26,7 +26,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:8-jdk-browsers
     working_directory: ~/cucumber-kotlin
     environment:
       MAVEN_OPTS: -Xmx3200m
