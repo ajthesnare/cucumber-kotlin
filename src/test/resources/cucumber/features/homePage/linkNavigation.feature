@@ -10,7 +10,7 @@ Feature: Home Page - Link Navigation
       | page                |
       | A/B Testing         |
       | Add/Remove Elements |
-  @todo
+  @mute
     Examples:
       | page                          |
       | Basic Auth                    |
