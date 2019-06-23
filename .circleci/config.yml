@@ -34,7 +34,7 @@ jobs:
       - checkout
       - run: mvn clean install -DskipTests=true
 
-  test:
+  test-all-but-mute:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
         environment:
@@ -53,7 +53,61 @@ jobs:
           name: Start Selenium
           command: java -jar selenium-server-standalone-3.5.3.jar -log selenium-reports/selenium.log
           background: true
-      - run: mvn test
+      - run: mvn test -Dcucumber.options="-t 'not @mute'"
+      - store_artifacts:
+          path: selenium-reports/
+      - store_artifacts:
+          path: target/cucumber-reports/
+      - store_artifacts:
+          path: target/surefire-reports/
+
+  test-not-parallel-or-mute:
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+        environment:
+          ENV: "remote"
+          CHROME_BIN: "/usr/bin/google-chrome"
+    working_directory: ~/cucumber-kotlin
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - run: mkdir selenium-reports
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log selenium-reports/selenium.log
+          background: true
+      - run: mvn test -Dcucumber.options="-t 'not (@mute or @parallel)'"
+      - store_artifacts:
+          path: selenium-reports/
+      - store_artifacts:
+          path: target/cucumber-reports/
+      - store_artifacts:
+          path: target/surefire-reports/
+
+  test-parallel:
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+        environment:
+          ENV: "remote"
+          CHROME_BIN: "/usr/bin/google-chrome"
+    working_directory: ~/cucumber-kotlin
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - run: mkdir selenium-reports
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log selenium-reports/selenium.log
+          background: true
+      - run: mvn test -Dcucumber.options="-t '@parallel and not @mute'"
       - store_artifacts:
           path: selenium-reports/
       - store_artifacts:
@@ -71,6 +125,12 @@ workflows:
           requires:
             - lint-kotlin
             - lint-gherkin
-      - test:
+      - test-all-but-mute:
+          requires:
+            - build
+      - test-not-parallel-or-mute:
+          requires:
+            - build
+      - test-parallel:
           requires:
             - build

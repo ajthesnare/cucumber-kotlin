@@ -1,4 +1,4 @@
-@ignore
+@parallel
 Feature: Feature 1
   Attempt to prove this form of parallel
   testing does not cause data to bleed

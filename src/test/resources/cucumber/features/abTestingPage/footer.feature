@@ -1,4 +1,4 @@
-@todo
+@mute
 Feature: Footer
 
   Scenario: todo
