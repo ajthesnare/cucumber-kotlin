@@ -17,7 +17,7 @@ class ABTestingPage(private var world: World) : BasePage(world) {
     override val pageTitle = "A/B Test"
 
     override fun get() {
-        world.driver.get(url)
+        navigateTo(url)
     }
 
     override fun isLoaded(): Boolean {

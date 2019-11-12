@@ -7,7 +7,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory
 import support.World
 import util.Constants.TIMEOUT_SEC_INT
 
-abstract class BasePage(world: World) {
+abstract class BasePage(private val world: World) {
     init {
         AjaxElementLocatorFactory(world.driver, TIMEOUT_SEC_INT)
         PageFactory.initElements(world.driver, this)
@@ -28,6 +28,10 @@ abstract class BasePage(world: World) {
 
     abstract fun get()
     abstract fun isLoaded(): Boolean
+
+    fun navigateTo(url: String) {
+        world.driver.get(url)
+    }
 
     fun isH1HeadingDisplayed(): Boolean {
         return h1Heading!!.isDisplayed

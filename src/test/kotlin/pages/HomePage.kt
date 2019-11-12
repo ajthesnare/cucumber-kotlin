@@ -17,7 +17,7 @@ class HomePage(private var world: World) : BasePage(world) {
     override val pageTitle = "Welcome to the-internet"
 
     override fun get() {
-        world.driver.get(url)
+        navigateTo(url)
     }
 
     override fun isLoaded(): Boolean {
