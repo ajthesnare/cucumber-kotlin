@@ -21,7 +21,6 @@ class HomePage(private var world: World) : BasePage(world) {
     }
 
     override fun isLoaded(): Boolean {
-        println(world.driver.currentUrl)
         val correctURL = world.driver.currentUrl == url
         val titleDisplayed = getH1Heading().isDisplayed
         val titleCorrect = getH1HeadingText().contains(pageTitle)
