@@ -18,14 +18,14 @@ class World {
     var value: Int = 0
 
     fun setUpChromeDriver() {
-        when (System.getenv("ENV") ?: "local") {
+        driver = when (System.getenv("ENV") ?: "local") {
             "local" -> {
                 System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_BIN") ?: "chromedriver.exe")
-                driver = ChromeDriver()
+                ChromeDriver()
             }
             "remote" -> {
                 val capability = DesiredCapabilities.chrome()
-                driver = RemoteWebDriver(URL("http://localhost:4444/wd/hub"), capability)
+                RemoteWebDriver(URL("http://localhost:4444/wd/hub"), capability)
             }
             else -> throw Exception("Invalid ENV: ${System.getenv("env")}")
         }
@@ -39,9 +39,7 @@ class World {
             try {
                 block()
                 return
-            } catch (a: AssertionError) {
-                Thread.sleep(intervalMs)
-            } catch (e: Exception) {
+            } catch (t: Throwable) {
                 Thread.sleep(intervalMs)
             }
         }
