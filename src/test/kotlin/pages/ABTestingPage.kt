@@ -7,14 +7,14 @@ import util.Constants.BASE_URL
 import util.Constants.TIMEOUT_SEC_INT
 
 class ABTestingPage(private var world: World) : BasePage(world) {
-    override val path = "/abtest"
-    override val url = "$BASE_URL$path"
-    override val pageTitle = "A/B Test"
-
     init {
         AjaxElementLocatorFactory(world.driver, TIMEOUT_SEC_INT)
         PageFactory.initElements(world.driver, this)
     }
+
+    override val path = "/abtest"
+    override val url = "$BASE_URL$path"
+    override val pageTitle = "A/B Test"
 
     override fun get() {
         world.driver.get(url)
@@ -22,8 +22,8 @@ class ABTestingPage(private var world: World) : BasePage(world) {
 
     override fun isLoaded(): Boolean {
         val correctURL = world.driver.currentUrl == url
-        val titleDisplayed = getH3Heading().isDisplayed
-        val titleCorrect = getH3HeadingText().contains(pageTitle)
+        val titleDisplayed = isH3HeadingDisplayed()
+        val titleCorrect = h3HeadingText.contains(pageTitle)
         return correctURL && titleDisplayed && titleCorrect
     }
 }
