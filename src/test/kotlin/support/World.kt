@@ -12,7 +12,6 @@ import java.net.URL
 import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
-
 class World {
     lateinit var driver: WebDriver
     var value: Int = 0
