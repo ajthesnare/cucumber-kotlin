@@ -1,7 +1,6 @@
 Feature: A/B Testing Page - Url Navigation
-  Manipulate the url to navigate
-  throughout the website.
+  Navigate to the A/B Testing Page via url
 
   Scenario: Navigate to the "A/B Testing" page via url
-    Given I am on the "A/B Testing" page
+    When I navigate to "/abtest"
     Then the "A/B Testing" page should display

@@ -1,14 +1,14 @@
 package steps
 
-import support.World
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
 import pages.ABTestingPage
 import pages.AddRemoveElementsPage
 import pages.HomePage
+import support.World
 import kotlin.test.assertTrue
 
-class PageSteps(var world: World) {
+class BasePageSteps(var world: World) {
     @Given("^I am on the \"(.+)\" page$")
     fun `I am on the {page} page`(pageOption: String) {
         val page = when (pageOption) {
