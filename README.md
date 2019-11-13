@@ -10,8 +10,11 @@ Run: `mvn install`
  
 ## Execute Tests
 
-Run: `mvn test`
-- 6 features run in parallel by default
+- By default, 6 features run in parallel.  
+
+Run all tests: `mvn test`
+
+Run a subset of tests: `mvn test -Dcucumber.options="-t '@tag'"`
 
 ## Notes
 
