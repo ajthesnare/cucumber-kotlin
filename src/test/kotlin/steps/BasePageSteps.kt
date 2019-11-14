@@ -2,9 +2,7 @@ package steps
 
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
-import pages.ABTestingPage
-import pages.AddRemoveElementsPage
-import pages.HomePage
+import pages.*
 import support.World
 import kotlin.test.assertTrue
 
@@ -15,7 +13,9 @@ class BasePageSteps(var world: World) {
             "Home" -> HomePage(world)
             "A/B Testing" -> ABTestingPage(world)
             "Add/Remove Elements" -> AddRemoveElementsPage(world)
-            else -> throw Exception("Unknown page specified.")
+            "Login" -> LoginPage(world)
+            "Secure" -> SecurePage(world)
+            else -> throw Exception("Unknown page specified: $pageOption")
         }
         page.get()
         assertTrue(page.isLoaded())
@@ -27,7 +27,9 @@ class BasePageSteps(var world: World) {
             "Home" -> HomePage(world)
             "A/B Testing" -> ABTestingPage(world)
             "Add/Remove Elements" -> AddRemoveElementsPage(world)
-            else -> throw Exception("Unknown page specified.")
+            "Login" -> LoginPage(world)
+            "Secure" -> SecurePage(world)
+            else -> throw Exception("Unknown page specified: $pageOption")
         }
         assertTrue(page.isLoaded())
     }
