@@ -6,7 +6,7 @@ import cucumber.api.java.Before
 class Hooks(private var world: World) {
     @Before
     fun `Runs before every scenario`() {
-        world.setUpChromeDriver()
+        world.setDriver()
     }
 
     @After

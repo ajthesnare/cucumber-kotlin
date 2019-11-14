@@ -34,7 +34,7 @@ jobs:
       - checkout
       - run: mvn clean install -DskipTests=true
 
-  test-all-but-mute:
+  test-chrome:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
         environment:
@@ -53,7 +53,34 @@ jobs:
           name: Start Selenium
           command: java -jar selenium-server-standalone-3.5.3.jar -log selenium-reports/selenium.log
           background: true
-      - run: mvn test -Dcucumber.options="-t 'not @mute'"
+      - run: mvn test
+      - store_artifacts:
+          path: selenium-reports/
+      - store_artifacts:
+          path: target/cucumber-reports/
+      - store_artifacts:
+          path: target/surefire-reports/
+
+  test-firefox:
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+        environment:
+          ENV: "remote"
+          FIREFOX_BIN: "/usr/bin/firefox"
+    working_directory: ~/cucumber-kotlin
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - run: mkdir selenium-reports
+      - run:
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log selenium-reports/selenium.log
+          background: true
+      - run: mvn test -Dbrowser=firefox
       - store_artifacts:
           path: selenium-reports/
       - store_artifacts:
@@ -71,6 +98,9 @@ workflows:
           requires:
             - lint-kotlin
             - lint-gherkin
-      - test-all-but-mute:
+      - test-chrome:
+          requires:
+            - build
+      - test-firefox:
           requires:
             - build
